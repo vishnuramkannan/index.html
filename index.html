@@ -10,7 +10,6 @@
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Tamil:wght@400;600;800&family=Playfair+Display:wght@400;700;900&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
     
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
 
     <style>
@@ -20,6 +19,7 @@
             --gold-dark: #aa771c;
             --bg-dark: #0f0f0f;
             --glass: rgba(30, 30, 30, 0.6);
+            --glass-strong: rgba(20, 20, 20, 0.95);
         }
 
         body {
@@ -58,7 +58,21 @@
             backdrop-filter: blur(12px);
             border: 1px solid rgba(191, 149, 63, 0.3);
             box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+            transition: all 0.3s ease;
         }
+        .service-card {
+            background: linear-gradient(145deg, rgba(30,30,30,0.8), rgba(10,10,10,0.9));
+            border: 1px solid #333;
+            transition: all 0.4s ease;
+            max-width: 400px; /* Limit width since it's single now */
+            width: 100%;
+        }
+        .service-card:hover {
+            border-color: #bf953f;
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(191, 149, 63, 0.2);
+        }
+
         .gold-border-glow {
             border: 1px solid var(--gold-primary);
             box-shadow: 0 0 15px rgba(191, 149, 63, 0.2);
@@ -69,90 +83,82 @@
             transform: translateY(-5px);
             border-color: var(--gold-light);
         }
+        
+        /* --- TICKER --- */
+        .ticker-wrap {
+            width: 100%;
+            background-color: #111;
+            border-bottom: 1px solid #333;
+            overflow: hidden;
+            height: 30px;
+            line-height: 30px;
+        }
+        .ticker {
+            display: inline-block;
+            white-space: nowrap;
+            padding-left: 100%;
+            animation: ticker 30s linear infinite;
+        }
+        .ticker-item {
+            display: inline-block;
+            padding: 0 2rem;
+            font-size: 0.8rem;
+            color: #ccc;
+            font-family: 'Inter', sans-serif;
+        }
+        @keyframes ticker {
+            0% { transform: translate3d(0, 0, 0); }
+            100% { transform: translate3d(-100%, 0, 0); }
+        }
+
         .lang-hidden { display: none; }
 
-        /* --- WIDGET STYLES --- */
-        
-        /* 1. Toggle Button */
+        /* --- FAQ --- */
+        .faq-content { max-height: 0; overflow: hidden; transition: max-height 0.3s ease-out; }
+        .faq-item.active .faq-content { max-height: 200px; }
+        .faq-icon { transition: transform 0.3s; }
+        .faq-item.active .faq-icon { transform: rotate(180deg); }
+
+        /* Widget Styles */
         #widget-toggle-btn {
-            position: fixed;
-            bottom: 25px;
-            right: 25px;
-            width: 60px;
-            height: 60px;
-            background: linear-gradient(135deg, #bf953f, #aa771c);
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            box-shadow: 0 0 20px rgba(191, 149, 63, 0.6);
-            cursor: pointer;
-            z-index: 1001;
-            transition: transform 0.3s;
-            animation: pulse-gold 2s infinite;
+            position: fixed; bottom: 25px; right: 25px; width: 60px; height: 60px;
+            background: linear-gradient(135deg, #bf953f, #aa771c); border-radius: 50%;
+            display: flex; align-items: center; justify-content: center;
+            box-shadow: 0 0 20px rgba(191, 149, 63, 0.6); cursor: pointer; z-index: 1001;
+            transition: transform 0.3s; animation: pulse-gold 2s infinite;
         }
-        #widget-toggle-btn:hover {
-            transform: scale(1.1);
-        }
+        #widget-toggle-btn:hover { transform: scale(1.1); }
         @keyframes pulse-gold {
             0% { box-shadow: 0 0 0 0 rgba(191, 149, 63, 0.7); }
             70% { box-shadow: 0 0 0 15px rgba(191, 149, 63, 0); }
             100% { box-shadow: 0 0 0 0 rgba(191, 149, 63, 0); }
         }
-
-        /* 2. Expanded Widget Container */
         #widget-container {
-            position: fixed;
-            bottom: 95px; 
-            right: 25px;
-            width: 340px;
-            height: 400px;
-            background: #121212;
-            border: 2px solid #bf953f;
-            border-radius: 15px;
-            box-shadow: 0 10px 50px rgba(0,0,0,0.9);
-            z-index: 1000;
-            overflow: hidden;
-            display: flex;
-            flex-direction: column;
-            
-            opacity: 0;
-            pointer-events: none;
-            transform: translateY(20px) scale(0.9);
-            transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+            position: fixed; bottom: 95px; right: 25px; width: 340px; height: 400px;
+            background: #121212; border: 2px solid #bf953f; border-radius: 15px;
+            box-shadow: 0 10px 50px rgba(0,0,0,0.9); z-index: 1000; overflow: hidden;
+            display: flex; flex-direction: column; opacity: 0; pointer-events: none;
+            transform: translateY(20px) scale(0.9); transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
         }
-
-        #widget-container.active {
-            opacity: 1;
-            pointer-events: all;
-            transform: translateY(0) scale(1);
-        }
-
+        #widget-container.active { opacity: 1; pointer-events: all; transform: translateY(0) scale(1); }
         .widget-header {
-            background: linear-gradient(90deg, #aa771c, #bf953f);
-            padding: 10px 15px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            color: black;
-            font-family: 'Inter', sans-serif;
-            font-weight: bold;
+            background: linear-gradient(90deg, #aa771c, #bf953f); padding: 10px 15px;
+            display: flex; justify-content: space-between; align-items: center; color: black; font-weight: bold;
         }
-        .widget-body {
-            flex-grow: 1;
-            background: black;
-        }
-
-        @media (max-width: 600px) {
-            #widget-container {
-                width: 90%;
-                right: 5%;
-                bottom: 100px;
-            }
-        }
+        .widget-body { flex-grow: 1; background: black; }
+        @media (max-width: 600px) { #widget-container { width: 90%; right: 5%; bottom: 100px; } }
     </style>
 </head>
 <body class="premium-bg min-h-screen flex flex-col items-center">
+
+    <div class="ticker-wrap bg-black/90">
+        <div class="ticker">
+            <div class="ticker-item"><i class="fas fa-check-circle text-green-500"></i> Open: 10:00 AM - 7:00 PM</div>
+            <div class="ticker-item"><i class="fas fa-gem text-blue-500"></i> 100% Silver Purity Guaranteed</div>
+            <div class="ticker-item"><i class="fas fa-fire text-red-500"></i> Instant Melting Service</div>
+            <div class="ticker-item"><i class="fas fa-scale-balanced text-[#bf953f]"></i> Precision Digital Weighing</div>
+        </div>
+    </div>
 
     <nav class="w-full bg-black/80 backdrop-blur-xl border-b border-[#b38728]/30 sticky top-0 z-50">
         <div class="max-w-5xl mx-auto px-4 py-3 flex justify-between items-center">
@@ -193,11 +199,77 @@
             </p>
         </div>
 
-        <div class="grid grid-cols-2 md:grid-cols-4 gap-4 w-full mb-12 animate__animated animate__fadeInUp animate__delay-1s">
-            <div class="glass-card p-4 rounded-xl text-center"><i class="fas fa-balance-scale text-2xl text-[#b38728] mb-2"></i><h3 class="font-bold text-white text-lg">100%</h3><p class="text-xs text-gray-400">Accuracy</p></div>
-            <div class="glass-card p-4 rounded-xl text-center"><i class="fas fa-bolt text-2xl text-[#b38728] mb-2"></i><h3 class="font-bold text-white text-lg">Fast</h3><p class="text-xs text-gray-400">Service</p></div>
-            <div class="glass-card p-4 rounded-xl text-center"><i class="fas fa-hand-holding-usd text-2xl text-[#b38728] mb-2"></i><h3 class="font-bold text-white text-lg">Best</h3><p class="text-xs text-gray-400">Price</p></div>
-            <div class="glass-card p-4 rounded-xl text-center"><i class="fas fa-users text-2xl text-[#b38728] mb-2"></i><h3 class="font-bold text-white text-lg">500+</h3><p class="text-xs text-gray-400">Clients</p></div>
+        <div class="grid grid-cols-2 gap-4 md:gap-8 w-full max-w-lg mb-12">
+            <div class="flex flex-col items-center p-3 border border-[#333] rounded-lg bg-black/40">
+                <i class="fas fa-leaf text-green-500 text-2xl mb-2"></i>
+                <span class="text-[10px] md:text-xs text-gray-400 uppercase tracking-wider">Eco Friendly</span>
+            </div>
+            <div class="flex flex-col items-center p-3 border border-[#333] rounded-lg bg-black/40">
+                <i class="fas fa-money-bill-wave text-[#fcf6ba] text-2xl mb-2"></i>
+                <span class="text-[10px] md:text-xs text-gray-400 uppercase tracking-wider">Instant Cash</span>
+            </div>
+        </div>
+
+        <div class="w-full mb-12 animate__animated animate__fadeInUp">
+            <h2 class="text-xl font-bold mb-8 text-[#d4af37] tracking-widest uppercase">
+                <span class="lang-ta tamil-font">எங்கள் சேவைகள்</span>
+                <span class="lang-en lang-hidden">Premium Services</span>
+            </h2>
+            
+            <div class="flex justify-center w-full">
+                <div class="service-card p-6 rounded-xl flex flex-col items-center text-center relative overflow-hidden group">
+                    <div class="absolute top-0 right-0 w-20 h-20 bg-gradient-to-bl from-[#bf953f]/20 to-transparent rounded-bl-full"></div>
+                    <div class="w-16 h-16 rounded-full bg-black border border-[#b38728] flex items-center justify-center mb-4 text-[#fcf6ba] text-2xl shadow-[0_0_15px_rgba(191,149,63,0.3)]">
+                        <i class="fas fa-fire-burner"></i>
+                    </div>
+                    <h3 class="text-lg font-bold text-white mb-2">
+                        <span class="lang-ta tamil-font">தூய உருக்குதல்</span>
+                        <span class="lang-en lang-hidden">Induction Melting</span>
+                    </h3>
+                    <p class="text-gray-400 text-xs leading-relaxed">
+                        <span class="lang-ta tamil-font">நவீன மின்சார இயந்திரங்கள் மூலம் குறைந்த சேதாரத்தில் தங்கம் மற்றும் வெள்ளி உருக்கித் தரப்படும்.</span>
+                        <span class="lang-en lang-hidden">Advanced electric induction technology ensures minimal loss and high purity output.</span>
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <div class="w-full glass-card-strong p-8 rounded-2xl mb-12 border-t border-b border-[#bf953f]/30">
+            <div class="grid grid-cols-3 gap-4 divide-x divide-[#333]">
+                <div class="flex flex-col items-center">
+                    <span class="text-3xl md:text-4xl font-black text-[#fcf6ba] mb-1">25+</span>
+                    <span class="text-[10px] md:text-xs text-[#b38728] uppercase font-bold tracking-wider">Years Exp</span>
+                </div>
+                <div class="flex flex-col items-center">
+                    <span class="text-3xl md:text-4xl font-black text-[#fcf6ba] mb-1">10K+</span>
+                    <span class="text-[10px] md:text-xs text-[#b38728] uppercase font-bold tracking-wider">Clients</span>
+                </div>
+                <div class="flex flex-col items-center">
+                    <span class="text-3xl md:text-4xl font-black text-[#fcf6ba] mb-1">100%</span>
+                    <span class="text-[10px] md:text-xs text-[#b38728] uppercase font-bold tracking-wider">Transparency</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="w-full max-w-2xl mb-12 text-left">
+            <h2 class="text-xl font-bold mb-4 text-[#d4af37] text-center uppercase tracking-widest">
+                <span class="lang-ta tamil-font">கேள்வி பதில்</span>
+                <span class="lang-en lang-hidden">FAQ</span>
+            </h2>
+            <div class="faq-item border-b border-[#333] mb-2" onclick="toggleFaq(this)">
+                <div class="flex justify-between items-center py-4 cursor-pointer hover:text-[#b38728] transition">
+                    <h3 class="font-bold text-lg"><span class="lang-ta tamil-font">உருக்கு சேதாரம் எவ்வளவு?</span><span class="lang-en lang-hidden">What is the melting loss?</span></h3>
+                    <i class="fas fa-chevron-down faq-icon text-[#b38728]"></i>
+                </div>
+                <div class="faq-content"><p class="text-gray-400 pb-4 text-sm leading-relaxed"><span class="lang-ta tamil-font">நாங்கள் நவீன Induction இயந்திரங்களை பயன்படுத்துவதால் சேதாரம் மிகக் குறைவு.</span><span class="lang-en lang-hidden">We use advanced Induction machines, so melting loss is minimal.</span></p></div>
+            </div>
+            <div class="faq-item border-b border-[#333] mb-2" onclick="toggleFaq(this)">
+                <div class="flex justify-between items-center py-4 cursor-pointer hover:text-[#b38728] transition">
+                    <h3 class="font-bold text-lg"><span class="lang-ta tamil-font">எவ்வளவு நேரம் ஆகும்?</span><span class="lang-en lang-hidden">How long does it take?</span></h3>
+                    <i class="fas fa-chevron-down faq-icon text-[#b38728]"></i>
+                </div>
+                <div class="faq-content"><p class="text-gray-400 pb-4 text-sm leading-relaxed"><span class="lang-ta tamil-font">10 முதல் 15 நிமிடங்கள் மட்டுமே ஆகும்.</span><span class="lang-en lang-hidden">Just 10 to 15 minutes for small quantities.</span></p></div>
+            </div>
         </div>
 
         <div class="grid grid-cols-1 md:grid-cols-3 gap-6 w-full mb-8">
@@ -207,14 +279,12 @@
                 <p class="text-gray-400 text-sm mb-4 text-center">Shevapet, Salem</p>
                 <a href="https://maps.app.goo.gl/fzEwLikkmxcXsWy9A?g_st=aw" target="_blank" class="text-xs border border-[#b38728] px-4 py-2 rounded hover:bg-[#b38728] hover:text-black transition">Open Map</a>
             </div>
-
             <div class="glass-card p-6 rounded-xl border-red-500/50 hover:border-red-500 transition duration-300 flex flex-col items-center">
                 <div class="w-12 h-12 rounded-full bg-red-600/20 flex items-center justify-center mb-4 text-red-500"><i class="fab fa-youtube text-2xl"></i></div>
                 <h3 class="text-lg font-bold mb-1 text-white">YouTube</h3>
                 <p class="text-gray-400 text-sm mb-4">@GKstar6</p>
                 <a href="https://www.youtube.com/@GKstar6" target="_blank" class="text-xs bg-red-600 text-white px-6 py-2 rounded-full font-bold hover:bg-red-700 transition">SUBSCRIBE</a>
             </div>
-
             <div class="glass-card p-6 rounded-xl gold-border-glow flex flex-col items-center">
                 <div class="w-12 h-12 rounded-full bg-[#b38728]/20 flex items-center justify-center mb-4 text-[#fcf6ba]"><i class="fas fa-envelope-open-text text-xl"></i></div>
                 <h3 class="text-lg font-bold mb-1 gold-text-gradient"><span class="lang-ta tamil-font">மின்னஞ்சல்</span><span class="lang-en lang-hidden">Email Us</span></h3>
@@ -227,7 +297,6 @@
     <div id="widget-toggle-btn" onclick="toggleWidget()">
         <i id="toggle-icon" class="fas fa-chart-line text-2xl text-black"></i>
     </div>
-
     <div id="widget-container">
         <div class="widget-header">
             <div class="flex items-center gap-2">
@@ -236,32 +305,13 @@
             </div>
             <button onclick="toggleWidget()" class="text-black hover:text-white transition"><i class="fas fa-times"></i></button>
         </div>
-        
         <div class="widget-body relative">
             <div class="tradingview-widget-container h-full">
                 <div class="tradingview-widget-container__widget h-full"></div>
                 <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-market-overview.js" async>
                 {
-                    "colorTheme": "dark",
-                    "dateRange": "1D",
-                    "showChart": false,
-                    "locale": "in",
-                    "largeChartUrl": "",
-                    "isTransparent": true,
-                    "showSymbolLogo": true,
-                    "width": "100%",
-                    "height": "100%",
-                    "tabs": [
-                    {
-                        "title": "MCX (₹)",
-                        "symbols": [
-                        { "s": "MCX:GOLD", "d": "GOLD (₹)" },
-                        { "s": "MCX:SILVER", "d": "SILVER (₹)" },
-                        { "s": "FX_IDC:XAUINR", "d": "SPOT GOLD (₹)" },
-                        { "s": "FX_IDC:XAGINR", "d": "SPOT SILVER (₹)" }
-                        ]
-                    }
-                    ]
+                    "colorTheme": "dark", "dateRange": "1D", "showChart": false, "locale": "in", "largeChartUrl": "", "isTransparent": true, "showSymbolLogo": true, "width": "100%", "height": "100%",
+                    "tabs": [{ "title": "MCX (₹)", "symbols": [{ "s": "MCX:GOLD", "d": "GOLD (₹)" }, { "s": "MCX:SILVER", "d": "SILVER (₹)" }, { "s": "FX_IDC:XAUINR", "d": "SPOT GOLD (₹)" }] }]
                 }
                 </script>
             </div>
@@ -277,11 +327,7 @@
             const container = document.getElementById('widget-container');
             const icon = document.getElementById('toggle-icon');
             container.classList.toggle('active');
-            if (container.classList.contains('active')) {
-                icon.className = 'fas fa-chevron-down text-2xl text-black';
-            } else {
-                icon.className = 'fas fa-chart-line text-2xl text-black';
-            }
+            if (container.classList.contains('active')) { icon.className = 'fas fa-chevron-down text-2xl text-black'; } else { icon.className = 'fas fa-chart-line text-2xl text-black'; }
         }
 
         let currentLang = 'ta'; 
@@ -292,13 +338,11 @@
             if (currentLang === 'ta') {
                 ta.forEach(e => e.classList.add('lang-hidden'));
                 en.forEach(e => e.classList.remove('lang-hidden'));
-                btn.textContent = "TA"; 
-                currentLang = 'en';
+                btn.textContent = "TA"; currentLang = 'en';
             } else {
                 en.forEach(e => e.classList.add('lang-hidden'));
                 ta.forEach(e => e.classList.remove('lang-hidden'));
-                btn.textContent = "EN"; 
-                currentLang = 'ta';
+                btn.textContent = "EN"; currentLang = 'ta';
             }
         }
 
@@ -317,6 +361,12 @@
         }
         updateShopStatus();
         setInterval(updateShopStatus, 60000);
+
+        function toggleFaq(element) {
+            const allItems = document.querySelectorAll('.faq-item');
+            allItems.forEach(item => { if (item !== element) item.classList.remove('active'); });
+            element.classList.toggle('active');
+        }
     </script>
 </body>
 </html>
