@@ -3,244 +3,320 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Salem Silver & Gold Melting | சேலம் வெள்ளி</title>
+    <title>Kannan Salem Silver & Gold Melting | கண்ணன் சேலம் வெள்ளி</title>
     
     <script src="https://cdn.tailwindcss.com"></script>
     
-    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Tamil:wght@400;700&family=Playfair+Display:wght@400;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Tamil:wght@400;600;800&family=Playfair+Display:wght@400;700;900&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
     
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
 
     <style>
+        :root {
+            --gold-primary: #bf953f;
+            --gold-light: #fcf6ba;
+            --gold-dark: #aa771c;
+            --bg-dark: #0f0f0f;
+            --glass: rgba(30, 30, 30, 0.6);
+        }
+
         body {
             font-family: 'Playfair Display', serif;
-            background-color: #1a1a1a;
-            color: #f3e5ab;
+            background-color: var(--bg-dark);
+            color: var(--gold-light);
             overflow-x: hidden;
+            padding-bottom: 100px;
         }
-        .tamil-font {
-            font-family: 'Noto Sans Tamil', sans-serif;
+
+        /* --- BACKGROUND --- */
+        .premium-bg {
+            background-color: #000000;
+            background-image: 
+                radial-gradient(circle at 50% 0%, #2a1f0a 0%, transparent 70%),
+                linear-gradient(rgba(255, 255, 255, 0.03) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
+            background-size: 100% 100%, 40px 40px, 40px 40px;
+            animation: bgShift 60s linear infinite;
         }
-        /* Gold Gradient Text */
-        .gold-text {
-            background: linear-gradient(to right, #bf953f, #fcf6ba, #b38728, #fbf5b7, #aa771c);
+
+        /* --- TEXT --- */
+        .tamil-font { font-family: 'Noto Sans Tamil', sans-serif; }
+        .sans-font { font-family: 'Inter', sans-serif; }
+        .gold-text-gradient {
+            background: linear-gradient(to bottom, #fcf6ba 0%, #bf953f 50%, #aa771c 100%);
             -webkit-background-clip: text;
             background-clip: text;
             color: transparent;
-        }
-        /* Gold Border & Shadows */
-        .gold-border {
-            border: 2px solid #b38728;
-            box-shadow: 0 0 15px rgba(191, 149, 63, 0.3);
-        }
-        .gold-glow:hover {
-            box-shadow: 0 0 25px rgba(191, 149, 63, 0.6);
-        }
-        
-        .hero-image {
-            width: 100%;
-            max-width: 800px;
-            border-radius: 12px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
-            transition: transform 0.3s ease;
-        }
-        .hero-image:hover {
-            transform: scale(1.02);
-        }
-        
-        /* Language Toggle Visibility */
-        .lang-hidden {
-            display: none;
+            filter: drop-shadow(0 2px 4px rgba(0,0,0,0.5));
         }
 
-        /* Fade In Animation */
-        .fade-in-up {
-            animation: fadeInUp 0.8s ease-out forwards;
+        /* --- CARDS --- */
+        .glass-card {
+            background: var(--glass);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(191, 149, 63, 0.3);
+            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+        }
+        .gold-border-glow {
+            border: 1px solid var(--gold-primary);
+            box-shadow: 0 0 15px rgba(191, 149, 63, 0.2);
+            transition: all 0.3s ease;
+        }
+        .gold-border-glow:hover {
+            box-shadow: 0 0 25px rgba(191, 149, 63, 0.5);
+            transform: translateY(-5px);
+            border-color: var(--gold-light);
+        }
+        .lang-hidden { display: none; }
+
+        /* --- WIDGET STYLES --- */
+        
+        /* 1. Toggle Button */
+        #widget-toggle-btn {
+            position: fixed;
+            bottom: 25px;
+            right: 25px;
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(135deg, #bf953f, #aa771c);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 0 20px rgba(191, 149, 63, 0.6);
+            cursor: pointer;
+            z-index: 1001;
+            transition: transform 0.3s;
+            animation: pulse-gold 2s infinite;
+        }
+        #widget-toggle-btn:hover {
+            transform: scale(1.1);
+        }
+        @keyframes pulse-gold {
+            0% { box-shadow: 0 0 0 0 rgba(191, 149, 63, 0.7); }
+            70% { box-shadow: 0 0 0 15px rgba(191, 149, 63, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(191, 149, 63, 0); }
+        }
+
+        /* 2. Expanded Widget Container */
+        #widget-container {
+            position: fixed;
+            bottom: 95px; 
+            right: 25px;
+            width: 340px;
+            height: 400px;
+            background: #121212;
+            border: 2px solid #bf953f;
+            border-radius: 15px;
+            box-shadow: 0 10px 50px rgba(0,0,0,0.9);
+            z-index: 1000;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            
             opacity: 0;
-            transform: translateY(20px);
+            pointer-events: none;
+            transform: translateY(20px) scale(0.9);
+            transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
         }
-        .delay-100 { animation-delay: 0.1s; }
-        .delay-200 { animation-delay: 0.2s; }
-        .delay-300 { animation-delay: 0.3s; }
 
-        @keyframes fadeInUp {
-            to {
-                opacity: 1;
-                transform: translateY(0);
+        #widget-container.active {
+            opacity: 1;
+            pointer-events: all;
+            transform: translateY(0) scale(1);
+        }
+
+        .widget-header {
+            background: linear-gradient(90deg, #aa771c, #bf953f);
+            padding: 10px 15px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            color: black;
+            font-family: 'Inter', sans-serif;
+            font-weight: bold;
+        }
+        .widget-body {
+            flex-grow: 1;
+            background: black;
+        }
+
+        @media (max-width: 600px) {
+            #widget-container {
+                width: 90%;
+                right: 5%;
+                bottom: 100px;
             }
         }
     </style>
 </head>
-<body class="min-h-screen flex flex-col items-center pb-20">
+<body class="premium-bg min-h-screen flex flex-col items-center">
 
-    <nav class="w-full bg-black/80 backdrop-blur-md border-b border-[#b38728] sticky top-0 z-50">
-        <div class="max-w-4xl mx-auto px-4 py-3 flex flex-wrap justify-between items-center gap-2">
-            <h1 class="text-xl md:text-2xl font-bold gold-text flex items-center gap-2">
-                <i class="fas fa-gem"></i>
-                <span class="lang-ta tamil-font">சேலம் வெள்ளி</span>
-                <span class="lang-en lang-hidden">Salem Silver</span>
-            </h1>
-
-            <div class="flex items-center gap-2">
-                <button onclick="toggleLanguage()" class="px-3 py-1 rounded-full text-xs font-bold uppercase bg-[#b38728] text-black hover:bg-[#fcf6ba] transition shadow-lg">
-                    <i class="fas fa-language"></i> <span id="btn-text">English</span>
-                </button>
-                <div id="shop-status" class="px-3 py-1 rounded-full text-xs font-bold uppercase bg-gray-800 text-gray-400 border border-gray-600">
-                    Checking...
+    <nav class="w-full bg-black/80 backdrop-blur-xl border-b border-[#b38728]/30 sticky top-0 z-50">
+        <div class="max-w-5xl mx-auto px-4 py-3 flex justify-between items-center">
+            <div class="flex items-center gap-3">
+                <div class="w-10 h-10 rounded-full bg-gradient-to-br from-[#bf953f] to-[#aa771c] flex items-center justify-center text-black font-bold text-lg shadow-[0_0_15px_rgba(191,149,63,0.6)]">
+                    <i class="fas fa-fire"></i>
                 </div>
+                <div class="leading-tight">
+                    <h1 class="text-lg font-bold text-[#fcf6ba] tracking-wide">
+                        <span class="lang-ta tamil-font">கண்ணன் சேலம் வெள்ளி</span>
+                        <span class="lang-en lang-hidden">KANNAN SALEM SILVER</span>
+                    </h1>
+                </div>
+            </div>
+            <div class="flex items-center gap-3">
+                <button onclick="toggleLanguage()" class="bg-[#2a2a2a] hover:bg-[#333] border border-[#b38728] text-[#fcf6ba] px-3 py-1.5 rounded-lg text-xs font-bold transition flex items-center gap-2">
+                    <i class="fas fa-globe"></i> <span id="btn-text">EN</span>
+                </button>
+                <div id="shop-status" class="hidden md:block px-3 py-1 rounded-lg text-xs font-bold uppercase bg-gray-800 border border-gray-600">Checking...</div>
             </div>
         </div>
     </nav>
 
-    <main class="w-full max-w-4xl px-4 mt-6 flex flex-col items-center text-center">
-        
-        <div class="relative w-full flex justify-center mb-6 group fade-in-up">
-            <div class="absolute -inset-1 bg-gradient-to-r from-[#bf953f] to-[#aa771c] rounded-lg blur opacity-25 group-hover:opacity-50 transition duration-1000"></div>
-            <img src="1000097414.jpg" alt="Salem Silver Banner" class="relative hero-image gold-border">
+    <main class="w-full max-w-5xl px-4 mt-8 flex flex-col items-center text-center">
+        <div class="relative w-full max-w-2xl mx-auto mb-8 group animate__animated animate__fadeInDown">
+            <div class="absolute -inset-2 bg-gradient-to-r from-[#bf953f] via-[#fcf6ba] to-[#aa771c] rounded-2xl blur-lg opacity-30 group-hover:opacity-60 transition duration-700"></div>
+            <img src="1000097414.jpg" alt="Kannan Salem Melting Works" class="relative w-full rounded-xl border-2 border-[#b38728] shadow-2xl z-10">
         </div>
 
-        <div class="space-y-3 mb-8 fade-in-up delay-100">
-            <h1 class="text-4xl md:text-5xl font-bold text-[#fcf6ba] drop-shadow-md leading-tight">
-                <span class="lang-ta tamil-font">சேலம் வெள்ளி</span>
-                <span class="lang-en lang-hidden">Salem Silver</span>
+        <div class="space-y-2 mb-10 animate__animated animate__fadeInUp">
+            <h1 class="text-4xl md:text-6xl font-black gold-text-gradient tracking-tight">
+                <span class="lang-ta tamil-font">கண்ணன் சேலம் வெள்ளி</span>
+                <span class="lang-en lang-hidden">KANNAN SALEM SILVER</span>
             </h1>
-            <h2 class="text-xl md:text-2xl text-[#bf953f]">
+            <p class="text-lg md:text-xl text-[#d4af37] tracking-widest font-light uppercase">
                 <span class="lang-ta tamil-font">மற்றும் தங்க உருக்குதல் வேலை</span>
-                <span class="lang-en lang-hidden">And Gold Melting Works</span>
-            </h2>
+                <span class="lang-en lang-hidden">Premium Gold & Silver Melting</span>
+            </p>
         </div>
 
-        <div class="flex flex-wrap justify-center gap-4 mb-8 fade-in-up delay-200">
-            <div class="bg-[#242424] px-4 py-2 rounded-lg border border-[#b38728]/50 flex items-center gap-2">
-                <i class="fas fa-burn text-[#fcf6ba]"></i>
-                <span class="text-sm text-gray-300 tamil-font">தங்க உருக்குதல்</span>
-            </div>
-            <div class="bg-[#242424] px-4 py-2 rounded-lg border border-[#b38728]/50 flex items-center gap-2">
-                <i class="fas fa-ring text-[#fcf6ba]"></i>
-                <span class="text-sm text-gray-300 tamil-font">வெள்ளி உருக்குதல்</span>
-            </div>
-            <div class="bg-[#242424] px-4 py-2 rounded-lg border border-[#b38728]/50 flex items-center gap-2">
-                <i class="fas fa-check-circle text-[#fcf6ba]"></i>
-                <span class="text-sm text-gray-300 tamil-font">துல்லியமான தரம்</span>
-            </div>
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-4 w-full mb-12 animate__animated animate__fadeInUp animate__delay-1s">
+            <div class="glass-card p-4 rounded-xl text-center"><i class="fas fa-balance-scale text-2xl text-[#b38728] mb-2"></i><h3 class="font-bold text-white text-lg">100%</h3><p class="text-xs text-gray-400">Accuracy</p></div>
+            <div class="glass-card p-4 rounded-xl text-center"><i class="fas fa-bolt text-2xl text-[#b38728] mb-2"></i><h3 class="font-bold text-white text-lg">Fast</h3><p class="text-xs text-gray-400">Service</p></div>
+            <div class="glass-card p-4 rounded-xl text-center"><i class="fas fa-hand-holding-usd text-2xl text-[#b38728] mb-2"></i><h3 class="font-bold text-white text-lg">Best</h3><p class="text-xs text-gray-400">Price</p></div>
+            <div class="glass-card p-4 rounded-xl text-center"><i class="fas fa-users text-2xl text-[#b38728] mb-2"></i><h3 class="font-bold text-white text-lg">500+</h3><p class="text-xs text-gray-400">Clients</p></div>
         </div>
 
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 w-full mb-10 fade-in-up delay-300">
-            
-            <div class="bg-[#242424] p-5 rounded-xl border border-[#b38728] flex flex-col items-center hover:bg-[#2a2a2a] transition gold-glow">
-                <i class="fas fa-map-marker-alt text-2xl text-[#b38728] mb-2"></i>
-                <h3 class="font-bold gold-text mb-1"><span class="lang-ta tamil-font">இடம்</span><span class="lang-en lang-hidden">Location</span></h3>
-                <p class="text-xs text-gray-400 mb-3">Salem, Tamil Nadu</p>
-                <a href="https://maps.app.goo.gl/fzEwLikkmxcXsWy9A?g_st=aw" target="_blank" class="text-xs text-[#fcf6ba] underline">Map <i class="fas fa-external-link-alt"></i></a>
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6 w-full mb-8">
+            <div class="glass-card p-6 rounded-xl gold-border-glow flex flex-col items-center group">
+                <div class="w-12 h-12 rounded-full bg-[#b38728]/20 flex items-center justify-center mb-4 text-[#fcf6ba]"><i class="fas fa-map-location-dot text-xl"></i></div>
+                <h3 class="text-lg font-bold mb-1 gold-text-gradient"><span class="lang-ta tamil-font">இடம்</span><span class="lang-en lang-hidden">Visit Us</span></h3>
+                <p class="text-gray-400 text-sm mb-4 text-center">Shevapet, Salem</p>
+                <a href="https://maps.app.goo.gl/fzEwLikkmxcXsWy9A?g_st=aw" target="_blank" class="text-xs border border-[#b38728] px-4 py-2 rounded hover:bg-[#b38728] hover:text-black transition">Open Map</a>
             </div>
 
-            <div class="bg-[#242424] p-5 rounded-xl border border-[#b38728] flex flex-col items-center hover:bg-[#2a2a2a] transition gold-glow">
-                <i class="fas fa-clock text-2xl text-[#b38728] mb-2"></i>
-                <h3 class="font-bold gold-text mb-1"><span class="lang-ta tamil-font">நேரம்</span><span class="lang-en lang-hidden">Timing</span></h3>
-                <p class="text-xs text-gray-400">10:00 AM - 07:00 PM</p>
-                <p class="text-[10px] text-[#b38728] uppercase mt-1">Mon - Sat</p>
+            <div class="glass-card p-6 rounded-xl border-red-500/50 hover:border-red-500 transition duration-300 flex flex-col items-center">
+                <div class="w-12 h-12 rounded-full bg-red-600/20 flex items-center justify-center mb-4 text-red-500"><i class="fab fa-youtube text-2xl"></i></div>
+                <h3 class="text-lg font-bold mb-1 text-white">YouTube</h3>
+                <p class="text-gray-400 text-sm mb-4">@GKstar6</p>
+                <a href="https://www.youtube.com/@GKstar6" target="_blank" class="text-xs bg-red-600 text-white px-6 py-2 rounded-full font-bold hover:bg-red-700 transition">SUBSCRIBE</a>
             </div>
 
-            <div class="bg-[#242424] p-5 rounded-xl border border-[#b38728] flex flex-col items-center hover:bg-[#2a2a2a] transition gold-glow">
-                <i class="fas fa-envelope text-2xl text-[#b38728] mb-2"></i>
-                <h3 class="font-bold gold-text mb-1"><span class="lang-ta tamil-font">தொடர்பு</span><span class="lang-en lang-hidden">Contact</span></h3>
-                <p class="text-xs text-gray-400 mb-3 break-all">hrhr65@gmail.com</p>
-                <a href="mailto:hrhr65@gmail.com" class="text-xs text-[#fcf6ba] underline">Email <i class="fas fa-arrow-right"></i></a>
+            <div class="glass-card p-6 rounded-xl gold-border-glow flex flex-col items-center">
+                <div class="w-12 h-12 rounded-full bg-[#b38728]/20 flex items-center justify-center mb-4 text-[#fcf6ba]"><i class="fas fa-envelope-open-text text-xl"></i></div>
+                <h3 class="text-lg font-bold mb-1 gold-text-gradient"><span class="lang-ta tamil-font">மின்னஞ்சல்</span><span class="lang-en lang-hidden">Email Us</span></h3>
+                <p class="text-gray-400 text-sm mb-4">hrhr65@gmail.com</p>
+                <a href="mailto:hrhr65@gmail.com" class="text-xs border border-[#b38728] px-4 py-2 rounded hover:bg-[#b38728] hover:text-black transition">Send Mail</a>
             </div>
-
-            <a href="https://www.youtube.com/@GKstar6" target="_blank" class="bg-gradient-to-br from-[#c4302b] to-[#8f1d18] p-5 rounded-xl border border-red-500 flex flex-col items-center hover:scale-105 transition shadow-lg cursor-pointer group">
-                <div class="bg-white/10 p-2 rounded-full mb-2 group-hover:bg-white/20 transition">
-                    <i class="fab fa-youtube text-2xl text-white"></i>
-                </div>
-                <h3 class="font-bold text-white mb-1">
-                    <span class="lang-ta tamil-font">சேனல்</span>
-                    <span class="lang-en lang-hidden">Channel</span>
-                </h3>
-                <p class="text-xs text-red-100 mb-2">@GKstar6</p>
-                <span class="text-xs bg-white text-red-700 px-3 py-1 rounded-full font-bold">Subscribe</span>
-            </a>
-
         </div>
-
-        <a href="mailto:hrhr65@gmail.com" class="w-full md:w-auto px-10 py-4 bg-gradient-to-r from-[#bf953f] to-[#aa771c] text-black font-bold text-lg rounded-full shadow-[0_0_20px_rgba(191,149,63,0.5)] hover:shadow-[0_0_30px_rgba(191,149,63,0.8)] hover:scale-105 transition transform flex items-center justify-center gap-3 fade-in-up delay-300">
-            <i class="fas fa-paper-plane"></i> 
-            <span class="lang-ta tamil-font">இப்போதே தொடர்புகொள்ளவும்</span>
-            <span class="lang-en lang-hidden">Contact Us Now</span>
-        </a>
-
     </main>
 
-    <footer class="mt-auto py-8 text-center text-gray-600 text-sm">
-        <p class="mb-2">© 2024 Salem Silver & Gold Melting.</p>
-        <div class="flex justify-center gap-4 text-lg">
-            <a href="https://www.youtube.com/@GKstar6" class="hover:text-[#fcf6ba] transition"><i class="fab fa-youtube"></i></a>
-            <a href="mailto:hrhr65@gmail.com" class="hover:text-[#fcf6ba] transition"><i class="fas fa-envelope"></i></a>
-            <a href="https://maps.app.goo.gl/fzEwLikkmxcXsWy9A?g_st=aw" class="hover:text-[#fcf6ba] transition"><i class="fas fa-map-marker-alt"></i></a>
+    <div id="widget-toggle-btn" onclick="toggleWidget()">
+        <i id="toggle-icon" class="fas fa-chart-line text-2xl text-black"></i>
+    </div>
+
+    <div id="widget-container">
+        <div class="widget-header">
+            <div class="flex items-center gap-2">
+                <span class="w-2 h-2 bg-red-600 rounded-full animate-pulse"></span>
+                <span>MCX LIVE (INR ₹)</span>
+            </div>
+            <button onclick="toggleWidget()" class="text-black hover:text-white transition"><i class="fas fa-times"></i></button>
         </div>
+        
+        <div class="widget-body relative">
+            <div class="tradingview-widget-container h-full">
+                <div class="tradingview-widget-container__widget h-full"></div>
+                <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-market-overview.js" async>
+                {
+                    "colorTheme": "dark",
+                    "dateRange": "1D",
+                    "showChart": false,
+                    "locale": "in",
+                    "largeChartUrl": "",
+                    "isTransparent": true,
+                    "showSymbolLogo": true,
+                    "width": "100%",
+                    "height": "100%",
+                    "tabs": [
+                    {
+                        "title": "MCX (₹)",
+                        "symbols": [
+                        { "s": "MCX:GOLD", "d": "GOLD (₹)" },
+                        { "s": "MCX:SILVER", "d": "SILVER (₹)" },
+                        { "s": "FX_IDC:XAUINR", "d": "SPOT GOLD (₹)" },
+                        { "s": "FX_IDC:XAGINR", "d": "SPOT SILVER (₹)" }
+                        ]
+                    }
+                    ]
+                }
+                </script>
+            </div>
+        </div>
+    </div>
+
+    <footer class="w-full bg-black border-t border-[#333] py-6 text-center">
+        <p class="text-gray-500 text-xs">© 2024 Kannan Salem Silver Melting Works.</p>
     </footer>
 
-    <button onclick="sharePage()" class="fixed bottom-6 right-6 bg-[#b38728] text-black p-4 rounded-full shadow-2xl hover:bg-[#fcf6ba] hover:scale-110 transition z-50 flex items-center justify-center">
-        <i class="fas fa-share-alt text-xl"></i>
-    </button>
-
     <script>
-        // --- Translation Logic ---
+        function toggleWidget() {
+            const container = document.getElementById('widget-container');
+            const icon = document.getElementById('toggle-icon');
+            container.classList.toggle('active');
+            if (container.classList.contains('active')) {
+                icon.className = 'fas fa-chevron-down text-2xl text-black';
+            } else {
+                icon.className = 'fas fa-chart-line text-2xl text-black';
+            }
+        }
+
         let currentLang = 'ta'; 
         function toggleLanguage() {
-            const taElements = document.querySelectorAll('.lang-ta');
-            const enElements = document.querySelectorAll('.lang-en');
-            const btnText = document.getElementById('btn-text');
-
+            const ta = document.querySelectorAll('.lang-ta');
+            const en = document.querySelectorAll('.lang-en');
+            const btn = document.getElementById('btn-text');
             if (currentLang === 'ta') {
-                taElements.forEach(el => el.classList.add('lang-hidden'));
-                enElements.forEach(el => el.classList.remove('lang-hidden'));
-                btnText.textContent = "தமிழ்"; 
+                ta.forEach(e => e.classList.add('lang-hidden'));
+                en.forEach(e => e.classList.remove('lang-hidden'));
+                btn.textContent = "TA"; 
                 currentLang = 'en';
             } else {
-                enElements.forEach(el => el.classList.add('lang-hidden'));
-                taElements.forEach(el => el.classList.remove('lang-hidden'));
-                btnText.textContent = "English"; 
+                en.forEach(e => e.classList.add('lang-hidden'));
+                ta.forEach(e => e.classList.remove('lang-hidden'));
+                btn.textContent = "EN"; 
                 currentLang = 'ta';
             }
         }
 
-        // --- Shop Status Logic ---
         function updateShopStatus() {
             const now = new Date();
-            const day = now.getDay(); 
-            const hour = now.getHours();
-            const statusBadge = document.getElementById('shop-status');
-            
-            const isOpenDay = day >= 1 && day <= 6;
-            const isOpenHour = hour >= 10 && hour < 19;
-
-            if (isOpenDay && isOpenHour) {
-                statusBadge.innerHTML = '<i class="fas fa-door-open mr-1 text-green-400"></i> Open';
-                statusBadge.className = 'px-3 py-1 rounded-full text-xs font-bold uppercase border border-green-500 text-green-400 bg-green-900/30';
+            const d = now.getDay(), h = now.getHours();
+            const open = (d >= 1 && d <= 6) && (h >= 10 && h < 19);
+            const badge = document.getElementById('shop-status');
+            if (open) {
+                badge.innerHTML = 'OPEN NOW';
+                badge.className = 'px-3 py-1 rounded-lg text-xs font-bold uppercase bg-green-900/30 border border-green-500 text-green-400';
             } else {
-                statusBadge.innerHTML = '<i class="fas fa-door-closed mr-1 text-red-400"></i> Closed';
-                statusBadge.className = 'px-3 py-1 rounded-full text-xs font-bold uppercase border border-red-500 text-red-400 bg-red-900/30';
+                badge.innerHTML = 'CLOSED';
+                badge.className = 'px-3 py-1 rounded-lg text-xs font-bold uppercase bg-red-900/30 border border-red-500 text-red-400';
             }
         }
         updateShopStatus();
         setInterval(updateShopStatus, 60000);
-
-        // --- Share Feature ---
-        async function sharePage() {
-            if (navigator.share) {
-                try {
-                    await navigator.share({
-                        title: 'Salem Silver & Gold Melting',
-                        text: 'Check out Salem Silver & Gold Melting Works!',
-                        url: window.location.href,
-                    });
-                } catch (err) {
-                    console.log('Error sharing:', err);
-                }
-            } else {
-                alert('Copy this link to share: ' + window.location.href);
-            }
-        }
     </script>
 </body>
 </html>
