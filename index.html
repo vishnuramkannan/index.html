@@ -16,8 +16,9 @@
             font-family: 'Playfair Display', serif;
             background-color: #1a1a1a;
             color: #f3e5ab;
+            transition: all 0.3s ease;
         }
-        .tamil-text {
+        .tamil-font {
             font-family: 'Noto Sans Tamil', sans-serif;
         }
         /* Gold Gradient Text */
@@ -42,23 +43,30 @@
         .hero-image:hover {
             transform: scale(1.02);
         }
-        .status-badge {
-            animation: pulse 2s infinite;
-        }
-        @keyframes pulse {
-            0% { box-shadow: 0 0 0 0 rgba(255, 255, 255, 0.2); }
-            70% { box-shadow: 0 0 0 10px rgba(255, 255, 255, 0); }
-            100% { box-shadow: 0 0 0 0 rgba(255, 255, 255, 0); }
+        /* Hidden class for translation toggle */
+        .lang-hidden {
+            display: none;
         }
     </style>
 </head>
 <body class="min-h-screen flex flex-col items-center pb-10">
 
     <nav class="w-full bg-black/50 backdrop-blur-md border-b border-[#b38728] sticky top-0 z-50">
-        <div class="max-w-4xl mx-auto px-4 py-4 flex justify-between items-center">
-            <h1 class="text-xl md:text-2xl font-bold gold-text">Salem Silver</h1>
-            <div id="shop-status" class="px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wider bg-gray-800 text-gray-400 border border-gray-600">
-                Checking Status...
+        <div class="max-w-4xl mx-auto px-4 py-4 flex flex-wrap justify-between items-center gap-2">
+            <h1 class="text-xl md:text-2xl font-bold gold-text">
+                <span class="lang-ta tamil-font">சேலம் வெள்ளி</span>
+                <span class="lang-en lang-hidden">Salem Silver</span>
+            </h1>
+
+            <div class="flex items-center gap-3">
+                <button onclick="toggleLanguage()" class="px-4 py-1.5 rounded-full text-xs font-bold uppercase tracking-wider bg-[#b38728] text-black hover:bg-[#fcf6ba] transition shadow-lg flex items-center gap-2">
+                    <i class="fas fa-language text-lg"></i>
+                    <span id="btn-text">English</span>
+                </button>
+
+                <div id="shop-status" class="px-3 py-1.5 rounded-full text-xs font-bold uppercase tracking-wider bg-gray-800 text-gray-400 border border-gray-600">
+                    Checking...
+                </div>
             </div>
         </div>
     </nav>
@@ -67,19 +75,19 @@
         
         <div class="relative w-full flex justify-center mb-8 group">
             <div class="absolute -inset-1 bg-gradient-to-r from-[#bf953f] to-[#aa771c] rounded-lg blur opacity-25 group-hover:opacity-50 transition duration-1000 group-hover:duration-200"></div>
-            <img src="1000097410.jpg" alt="Salem Silver and Gold Melting Banner" class="relative hero-image gold-border">
+            <img src="1000097414.jpg" alt="Salem Silver and Gold Melting Banner" class="relative hero-image gold-border">
         </div>
 
-        <div class="space-y-2 mb-8">
-            <h1 class="text-4xl md:text-5xl font-bold tamil-text text-[#fcf6ba] drop-shadow-md">
-                சேலம் வெள்ளி
+        <div class="space-y-4 mb-8">
+            <h1 class="text-4xl md:text-5xl font-bold text-[#fcf6ba] drop-shadow-md">
+                <span class="lang-ta tamil-font">சேலம் வெள்ளி</span>
+                <span class="lang-en lang-hidden">Salem Silver</span>
             </h1>
-            <h2 class="text-xl md:text-2xl tamil-text text-[#bf953f]">
-                மற்றும் தங்க உருக்குதல் வேலை
+            
+            <h2 class="text-xl md:text-2xl text-[#bf953f]">
+                <span class="lang-ta tamil-font">மற்றும் தங்க உருக்குதல் வேலை</span>
+                <span class="lang-en lang-hidden">And Gold Melting Works</span>
             </h2>
-            <p class="text-sm md:text-base text-gray-400 uppercase tracking-widest mt-2">
-                Gold & Silver Melting Works
-            </p>
         </div>
 
         <div class="grid grid-cols-1 md:grid-cols-3 gap-6 w-full mb-10">
@@ -88,51 +96,99 @@
                 <div class="w-12 h-12 rounded-full bg-[#b38728]/20 flex items-center justify-center mb-4 text-[#fcf6ba]">
                     <i class="fas fa-map-marker-alt text-2xl"></i>
                 </div>
-                <h3 class="text-lg font-bold mb-2 gold-text">Location</h3>
-                <p class="tamil-text text-center text-gray-300">தமிழ்நாடு சேலம் செவ்வாய்ப்பேட்டை</p>
-                <p class="text-sm text-gray-400 mt-1">Shevapet, Salem, Tamil Nadu</p>
-                <a href="https://www.google.com/maps/search/?api=1&query=Shevapet+Salem+Tamil+Nadu" target="_blank" class="mt-4 text-xs text-[#b38728] hover:underline hover:text-[#fcf6ba]">View on Map &rarr;</a>
+                <h3 class="text-lg font-bold mb-2 gold-text">
+                    <span class="lang-ta tamil-font">இடம்</span>
+                    <span class="lang-en lang-hidden">Location</span>
+                </h3>
+                
+                <p class="text-center text-gray-300">
+                    <span class="lang-ta tamil-font">தமிழ்நாடு சேலம் செவ்வாய்ப்பேட்டை</span>
+                    <span class="lang-en lang-hidden">Shevapet, Salem, Tamil Nadu</span>
+                </p>
+
+                <a href="https://maps.app.goo.gl/fzEwLikkmxcXsWy9A?g_st=aw" target="_blank" class="mt-4 text-xs text-[#b38728] hover:underline hover:text-[#fcf6ba]">
+                    <span class="lang-ta tamil-font">வரைபடம் பார்க்க →</span>
+                    <span class="lang-en lang-hidden">View on Map →</span>
+                </a>
             </div>
 
             <div class="bg-[#242424] p-6 rounded-xl border border-[#b38728] flex flex-col items-center hover:bg-[#2a2a2a] transition duration-300">
                 <div class="w-12 h-12 rounded-full bg-[#b38728]/20 flex items-center justify-center mb-4 text-[#fcf6ba]">
                     <i class="fas fa-clock text-2xl"></i>
                 </div>
-                <h3 class="text-lg font-bold mb-2 gold-text">Working Hours</h3>
-                <p class="tamil-text text-center text-gray-300">காலை 10 - இரவு 7 வரை</p>
-                <p class="text-sm text-gray-400 mt-1">10:00 AM - 07:00 PM</p>
-                <p class="text-xs text-[#b38728] mt-2 font-bold uppercase">Monday to Saturday</p>
+                <h3 class="text-lg font-bold mb-2 gold-text">
+                    <span class="lang-ta tamil-font">வேலை நேரம்</span>
+                    <span class="lang-en lang-hidden">Working Hours</span>
+                </h3>
+                
+                <p class="text-center text-gray-300">
+                    <span class="lang-ta tamil-font">காலை 10 - இரவு 7 வரை</span>
+                    <span class="lang-en lang-hidden">10:00 AM - 07:00 PM</span>
+                </p>
+                
+                <p class="text-xs text-[#b38728] mt-2 font-bold uppercase">
+                    <span class="lang-ta tamil-font">திங்கள் முதல் சனிக்கிழமை வரை</span>
+                    <span class="lang-en lang-hidden">Monday to Saturday</span>
+                </p>
             </div>
 
             <div class="bg-[#242424] p-6 rounded-xl border border-[#b38728] flex flex-col items-center hover:bg-[#2a2a2a] transition duration-300">
                 <div class="w-12 h-12 rounded-full bg-[#b38728]/20 flex items-center justify-center mb-4 text-[#fcf6ba]">
                     <i class="fas fa-envelope text-2xl"></i>
                 </div>
-                <h3 class="text-lg font-bold mb-2 gold-text">Contact</h3>
+                <h3 class="text-lg font-bold mb-2 gold-text">
+                    <span class="lang-ta tamil-font">தொடர்புக்கு</span>
+                    <span class="lang-en lang-hidden">Contact</span>
+                </h3>
                 <p class="text-gray-300 break-all">hrhr65@gmail.com</p>
-                <a href="mailto:hrhr65@gmail.com" class="mt-4 px-4 py-2 bg-[#b38728] text-black font-bold rounded hover:bg-[#fcf6ba] transition shadow-lg">
-                    Send Email
+                <a href="mailto:hrhr65@gmail.com" class="mt-4 px-4 py-2 bg-[#b38728] text-black font-bold rounded hover:bg-[#fcf6ba] transition shadow-lg text-sm">
+                    <span class="lang-ta tamil-font">மின்னஞ்சல் அனுப்ப</span>
+                    <span class="lang-en lang-hidden">Send Email</span>
                 </a>
             </div>
         </div>
 
         <a href="mailto:hrhr65@gmail.com" class="w-full md:w-auto px-8 py-4 bg-gradient-to-r from-[#bf953f] to-[#aa771c] text-black font-bold text-lg rounded-full shadow-[0_0_20px_rgba(191,149,63,0.5)] hover:shadow-[0_0_30px_rgba(191,149,63,0.8)] hover:scale-105 transition transform flex items-center justify-center gap-2">
-            <i class="fas fa-paper-plane"></i> Contact Us Now
+            <i class="fas fa-paper-plane"></i> 
+            <span class="lang-ta tamil-font">இப்போதே தொடர்புகொள்ளவும்</span>
+            <span class="lang-en lang-hidden">Contact Us Now</span>
         </a>
 
     </main>
 
     <footer class="mt-auto py-6 text-center text-gray-500 text-sm">
-        <p>&copy; 2024 Salem Silver & Gold Melting. All Rights Reserved.</p>
+        <p>© 2024 Salem Silver & Gold Melting. All Rights Reserved.</p>
     </footer>
 
     <script>
+        // --- Translation Logic ---
+        let currentLang = 'ta'; // Default to Tamil
+
+        function toggleLanguage() {
+            const taElements = document.querySelectorAll('.lang-ta');
+            const enElements = document.querySelectorAll('.lang-en');
+            const btnText = document.getElementById('btn-text');
+
+            if (currentLang === 'ta') {
+                // Switch to English
+                taElements.forEach(el => el.classList.add('lang-hidden'));
+                enElements.forEach(el => el.classList.remove('lang-hidden'));
+                btnText.textContent = "தமிழ்"; // Change button to say "Tamil"
+                currentLang = 'en';
+            } else {
+                // Switch to Tamil
+                enElements.forEach(el => el.classList.add('lang-hidden'));
+                taElements.forEach(el => el.classList.remove('lang-hidden'));
+                btnText.textContent = "English"; // Change button to say "English"
+                currentLang = 'ta';
+            }
+        }
+
+        // --- Shop Open/Close Status Logic ---
         function updateShopStatus() {
             const now = new Date();
-            // 0 = Sunday, 1 = Monday, ..., 6 = Saturday
             const day = now.getDay(); 
-            const hour = now.getHours(); // 0-23
-            const minute = now.getMinutes();
+            const hour = now.getHours();
 
             const statusBadge = document.getElementById('shop-status');
             
@@ -141,20 +197,14 @@
             const isOpenHour = hour >= 10 && hour < 19;
 
             if (isOpenDay && isOpenHour) {
-                statusBadge.innerHTML = '<i class="fas fa-door-open mr-1"></i> Open Now';
-                statusBadge.className = 'px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wider bg-green-900 text-green-200 border border-green-500 status-badge';
+                statusBadge.innerHTML = '<i class="fas fa-door-open mr-1"></i> Open';
+                statusBadge.className = 'px-3 py-1.5 rounded-full text-xs font-bold uppercase tracking-wider bg-green-900 text-green-200 border border-green-500';
             } else {
-                let message = "Closed";
-                if (!isOpenDay) message = "Closed (Sunday)";
-                else if (hour < 10) message = "Opening Soon (10 AM)";
-                else message = "Closed (Opens 10 AM)";
-
-                statusBadge.innerHTML = `<i class="fas fa-door-closed mr-1"></i> ${message}`;
-                statusBadge.className = 'px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wider bg-red-900 text-red-200 border border-red-500';
+                statusBadge.innerHTML = '<i class="fas fa-door-closed mr-1"></i> Closed';
+                statusBadge.className = 'px-3 py-1.5 rounded-full text-xs font-bold uppercase tracking-wider bg-red-900 text-red-200 border border-red-500';
             }
         }
 
-        // Run immediately and update every minute
         updateShopStatus();
         setInterval(updateShopStatus, 60000);
     </script>
