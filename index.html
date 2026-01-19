@@ -72,16 +72,16 @@
             transform: translateY(-5px);
             box-shadow: 0 10px 30px rgba(191, 149, 63, 0.2);
         }
-
-        /* --- PURITY TABLE --- */
-        .purity-table { width: 100%; border-collapse: collapse; font-family: 'Inter', sans-serif; font-size: 0.9rem; }
-        .purity-table th { background: rgba(191, 149, 63, 0.2); color: #fcf6ba; padding: 12px; text-align: left; border-bottom: 1px solid #bf953f; }
-        .purity-table td { padding: 12px; border-bottom: 1px solid #333; color: #ccc; }
-        .purity-table tr:hover td { background: rgba(255,255,255,0.05); color: white; }
-
-        /* --- FORM --- */
-        .form-input { width: 100%; padding: 12px; background: rgba(0,0,0,0.5); border: 1px solid #444; border-radius: 8px; color: white; margin-bottom: 15px; font-family: 'Inter', sans-serif; }
-        .form-input:focus { outline: none; border-color: #bf953f; }
+        .gold-border-glow {
+            border: 1px solid var(--gold-primary);
+            box-shadow: 0 0 15px rgba(191, 149, 63, 0.2);
+            transition: all 0.3s ease;
+        }
+        .gold-border-glow:hover {
+            box-shadow: 0 0 25px rgba(191, 149, 63, 0.5);
+            transform: translateY(-5px);
+            border-color: var(--gold-light);
+        }
 
         /* --- TICKER --- */
         .ticker-wrap { width: 100%; background-color: #111; border-bottom: 1px solid #333; overflow: hidden; height: 30px; line-height: 30px; }
@@ -190,55 +190,6 @@
                         <span class="lang-en lang-hidden">Advanced electric induction technology ensures minimal loss and high purity output.</span>
                     </p>
                 </div>
-            </div>
-        </div>
-
-        <div class="w-full max-w-3xl mb-12">
-            <h2 class="text-xl font-bold mb-6 text-[#d4af37] tracking-widest uppercase">
-                <span class="lang-ta tamil-font">தரம் வழிகாட்டி</span>
-                <span class="lang-en lang-hidden">Purity Guide (Approx)</span>
-            </h2>
-            <div class="glass-card rounded-xl overflow-hidden">
-                <table class="purity-table">
-                    <thead>
-                        <tr>
-                            <th>Item</th>
-                            <th>Expected Touch (%)</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr><td><span class="lang-ta tamil-font">கொலுசு (Anklets)</span><span class="lang-en lang-hidden">Silver Anklets</span></td><td>50% - 70%</td></tr>
-                        <tr><td><span class="lang-ta tamil-font">பழைய பாத்திரம் (Utensils)</span><span class="lang-en lang-hidden">Old Utensils</span></td><td>80% - 90%</td></tr>
-                        <tr><td><span class="lang-ta tamil-font">நாணயங்கள் (Coins)</span><span class="lang-en lang-hidden">Coins</span></td><td>90% - 92%</td></tr>
-                        <tr><td><span class="lang-ta tamil-font">925 நகைகள்</span><span class="lang-en lang-hidden">925 Jewelry</span></td><td>92.5%</td></tr>
-                        <tr><td><span class="lang-ta tamil-font">கட்டிகள் (Bars)</span><span class="lang-en lang-hidden">Pure Bars</span></td><td>99.9%</td></tr>
-                    </tbody>
-                </table>
-                <p class="text-xs text-gray-500 p-3 text-center">*Approximate values. Actual purity depends on testing.</p>
-            </div>
-        </div>
-
-        <div class="w-full max-w-2xl mb-12">
-            <h2 class="text-xl font-bold mb-6 text-[#d4af37] tracking-widest uppercase">
-                <span class="lang-ta tamil-font">விலை கேட்க</span>
-                <span class="lang-en lang-hidden">Get a Quote</span>
-            </h2>
-            <div class="glass-card-strong p-8 rounded-xl border border-[#b38728]/30">
-                <form onsubmit="event.preventDefault(); alert('Quote Request Sent!');">
-                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                        <input type="text" placeholder="Name / பெயர்" class="form-input">
-                        <input type="text" placeholder="Mobile / எண்" class="form-input">
-                    </div>
-                    <select class="form-input bg-black text-gray-300">
-                        <option>Silver (வெள்ளி)</option>
-                        <option>Gold (தங்கம்)</option>
-                    </select>
-                    <input type="number" placeholder="Approx Weight (grams)" class="form-input">
-                    <button class="w-full bg-gradient-to-r from-[#b38728] to-[#aa771c] text-black font-bold py-3 rounded hover:shadow-[0_0_20px_rgba(191,149,63,0.4)] transition">
-                        <span class="lang-ta tamil-font">அனுப்பவும்</span>
-                        <span class="lang-en lang-hidden">SEND REQUEST</span>
-                    </button>
-                </form>
             </div>
         </div>
 
