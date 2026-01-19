@@ -64,7 +64,7 @@
             background: linear-gradient(145deg, rgba(30,30,30,0.8), rgba(10,10,10,0.9));
             border: 1px solid #333;
             transition: all 0.4s ease;
-            max-width: 400px; /* Limit width since it's single now */
+            max-width: 400px;
             width: 100%;
         }
         .service-card:hover {
@@ -73,43 +73,21 @@
             box-shadow: 0 10px 30px rgba(191, 149, 63, 0.2);
         }
 
-        .gold-border-glow {
-            border: 1px solid var(--gold-primary);
-            box-shadow: 0 0 15px rgba(191, 149, 63, 0.2);
-            transition: all 0.3s ease;
-        }
-        .gold-border-glow:hover {
-            box-shadow: 0 0 25px rgba(191, 149, 63, 0.5);
-            transform: translateY(-5px);
-            border-color: var(--gold-light);
-        }
-        
+        /* --- PURITY TABLE --- */
+        .purity-table { width: 100%; border-collapse: collapse; font-family: 'Inter', sans-serif; font-size: 0.9rem; }
+        .purity-table th { background: rgba(191, 149, 63, 0.2); color: #fcf6ba; padding: 12px; text-align: left; border-bottom: 1px solid #bf953f; }
+        .purity-table td { padding: 12px; border-bottom: 1px solid #333; color: #ccc; }
+        .purity-table tr:hover td { background: rgba(255,255,255,0.05); color: white; }
+
+        /* --- FORM --- */
+        .form-input { width: 100%; padding: 12px; background: rgba(0,0,0,0.5); border: 1px solid #444; border-radius: 8px; color: white; margin-bottom: 15px; font-family: 'Inter', sans-serif; }
+        .form-input:focus { outline: none; border-color: #bf953f; }
+
         /* --- TICKER --- */
-        .ticker-wrap {
-            width: 100%;
-            background-color: #111;
-            border-bottom: 1px solid #333;
-            overflow: hidden;
-            height: 30px;
-            line-height: 30px;
-        }
-        .ticker {
-            display: inline-block;
-            white-space: nowrap;
-            padding-left: 100%;
-            animation: ticker 30s linear infinite;
-        }
-        .ticker-item {
-            display: inline-block;
-            padding: 0 2rem;
-            font-size: 0.8rem;
-            color: #ccc;
-            font-family: 'Inter', sans-serif;
-        }
-        @keyframes ticker {
-            0% { transform: translate3d(0, 0, 0); }
-            100% { transform: translate3d(-100%, 0, 0); }
-        }
+        .ticker-wrap { width: 100%; background-color: #111; border-bottom: 1px solid #333; overflow: hidden; height: 30px; line-height: 30px; }
+        .ticker { display: inline-block; white-space: nowrap; padding-left: 100%; animation: ticker 30s linear infinite; }
+        .ticker-item { display: inline-block; padding: 0 2rem; font-size: 0.8rem; color: #ccc; font-family: 'Inter', sans-serif; }
+        @keyframes ticker { 0% { transform: translate3d(0, 0, 0); } 100% { transform: translate3d(-100%, 0, 0); } }
 
         .lang-hidden { display: none; }
 
@@ -120,31 +98,13 @@
         .faq-item.active .faq-icon { transform: rotate(180deg); }
 
         /* Widget Styles */
-        #widget-toggle-btn {
-            position: fixed; bottom: 25px; right: 25px; width: 60px; height: 60px;
-            background: linear-gradient(135deg, #bf953f, #aa771c); border-radius: 50%;
-            display: flex; align-items: center; justify-content: center;
-            box-shadow: 0 0 20px rgba(191, 149, 63, 0.6); cursor: pointer; z-index: 1001;
-            transition: transform 0.3s; animation: pulse-gold 2s infinite;
-        }
+        #widget-toggle-btn { position: fixed; bottom: 25px; right: 25px; width: 60px; height: 60px; background: linear-gradient(135deg, #bf953f, #aa771c); border-radius: 50%; display: flex; align-items: center; justify-content: center; box-shadow: 0 0 20px rgba(191, 149, 63, 0.6); cursor: pointer; z-index: 1001; transition: transform 0.3s; animation: pulse-gold 2s infinite; }
         #widget-toggle-btn:hover { transform: scale(1.1); }
-        @keyframes pulse-gold {
-            0% { box-shadow: 0 0 0 0 rgba(191, 149, 63, 0.7); }
-            70% { box-shadow: 0 0 0 15px rgba(191, 149, 63, 0); }
-            100% { box-shadow: 0 0 0 0 rgba(191, 149, 63, 0); }
-        }
-        #widget-container {
-            position: fixed; bottom: 95px; right: 25px; width: 340px; height: 400px;
-            background: #121212; border: 2px solid #bf953f; border-radius: 15px;
-            box-shadow: 0 10px 50px rgba(0,0,0,0.9); z-index: 1000; overflow: hidden;
-            display: flex; flex-direction: column; opacity: 0; pointer-events: none;
-            transform: translateY(20px) scale(0.9); transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
-        }
+        
+        @keyframes pulse-gold { 0% { box-shadow: 0 0 0 0 rgba(191, 149, 63, 0.7); } 70% { box-shadow: 0 0 0 15px rgba(191, 149, 63, 0); } 100% { box-shadow: 0 0 0 0 rgba(191, 149, 63, 0); } }
+        #widget-container { position: fixed; bottom: 95px; right: 25px; width: 340px; height: 400px; background: #121212; border: 2px solid #bf953f; border-radius: 15px; box-shadow: 0 10px 50px rgba(0,0,0,0.9); z-index: 1000; overflow: hidden; display: flex; flex-direction: column; opacity: 0; pointer-events: none; transform: translateY(20px) scale(0.9); transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1); }
         #widget-container.active { opacity: 1; pointer-events: all; transform: translateY(0) scale(1); }
-        .widget-header {
-            background: linear-gradient(90deg, #aa771c, #bf953f); padding: 10px 15px;
-            display: flex; justify-content: space-between; align-items: center; color: black; font-weight: bold;
-        }
+        .widget-header { background: linear-gradient(90deg, #aa771c, #bf953f); padding: 10px 15px; display: flex; justify-content: space-between; align-items: center; color: black; font-weight: bold; }
         .widget-body { flex-grow: 1; background: black; }
         @media (max-width: 600px) { #widget-container { width: 90%; right: 5%; bottom: 100px; } }
     </style>
@@ -215,7 +175,6 @@
                 <span class="lang-ta tamil-font">எங்கள் சேவைகள்</span>
                 <span class="lang-en lang-hidden">Premium Services</span>
             </h2>
-            
             <div class="flex justify-center w-full">
                 <div class="service-card p-6 rounded-xl flex flex-col items-center text-center relative overflow-hidden group">
                     <div class="absolute top-0 right-0 w-20 h-20 bg-gradient-to-bl from-[#bf953f]/20 to-transparent rounded-bl-full"></div>
@@ -234,20 +193,52 @@
             </div>
         </div>
 
-        <div class="w-full glass-card-strong p-8 rounded-2xl mb-12 border-t border-b border-[#bf953f]/30">
-            <div class="grid grid-cols-3 gap-4 divide-x divide-[#333]">
-                <div class="flex flex-col items-center">
-                    <span class="text-3xl md:text-4xl font-black text-[#fcf6ba] mb-1">25+</span>
-                    <span class="text-[10px] md:text-xs text-[#b38728] uppercase font-bold tracking-wider">Years Exp</span>
-                </div>
-                <div class="flex flex-col items-center">
-                    <span class="text-3xl md:text-4xl font-black text-[#fcf6ba] mb-1">10K+</span>
-                    <span class="text-[10px] md:text-xs text-[#b38728] uppercase font-bold tracking-wider">Clients</span>
-                </div>
-                <div class="flex flex-col items-center">
-                    <span class="text-3xl md:text-4xl font-black text-[#fcf6ba] mb-1">100%</span>
-                    <span class="text-[10px] md:text-xs text-[#b38728] uppercase font-bold tracking-wider">Transparency</span>
-                </div>
+        <div class="w-full max-w-3xl mb-12">
+            <h2 class="text-xl font-bold mb-6 text-[#d4af37] tracking-widest uppercase">
+                <span class="lang-ta tamil-font">தரம் வழிகாட்டி</span>
+                <span class="lang-en lang-hidden">Purity Guide (Approx)</span>
+            </h2>
+            <div class="glass-card rounded-xl overflow-hidden">
+                <table class="purity-table">
+                    <thead>
+                        <tr>
+                            <th>Item</th>
+                            <th>Expected Touch (%)</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr><td><span class="lang-ta tamil-font">கொலுசு (Anklets)</span><span class="lang-en lang-hidden">Silver Anklets</span></td><td>50% - 70%</td></tr>
+                        <tr><td><span class="lang-ta tamil-font">பழைய பாத்திரம் (Utensils)</span><span class="lang-en lang-hidden">Old Utensils</span></td><td>80% - 90%</td></tr>
+                        <tr><td><span class="lang-ta tamil-font">நாணயங்கள் (Coins)</span><span class="lang-en lang-hidden">Coins</span></td><td>90% - 92%</td></tr>
+                        <tr><td><span class="lang-ta tamil-font">925 நகைகள்</span><span class="lang-en lang-hidden">925 Jewelry</span></td><td>92.5%</td></tr>
+                        <tr><td><span class="lang-ta tamil-font">கட்டிகள் (Bars)</span><span class="lang-en lang-hidden">Pure Bars</span></td><td>99.9%</td></tr>
+                    </tbody>
+                </table>
+                <p class="text-xs text-gray-500 p-3 text-center">*Approximate values. Actual purity depends on testing.</p>
+            </div>
+        </div>
+
+        <div class="w-full max-w-2xl mb-12">
+            <h2 class="text-xl font-bold mb-6 text-[#d4af37] tracking-widest uppercase">
+                <span class="lang-ta tamil-font">விலை கேட்க</span>
+                <span class="lang-en lang-hidden">Get a Quote</span>
+            </h2>
+            <div class="glass-card-strong p-8 rounded-xl border border-[#b38728]/30">
+                <form onsubmit="event.preventDefault(); alert('Quote Request Sent!');">
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        <input type="text" placeholder="Name / பெயர்" class="form-input">
+                        <input type="text" placeholder="Mobile / எண்" class="form-input">
+                    </div>
+                    <select class="form-input bg-black text-gray-300">
+                        <option>Silver (வெள்ளி)</option>
+                        <option>Gold (தங்கம்)</option>
+                    </select>
+                    <input type="number" placeholder="Approx Weight (grams)" class="form-input">
+                    <button class="w-full bg-gradient-to-r from-[#b38728] to-[#aa771c] text-black font-bold py-3 rounded hover:shadow-[0_0_20px_rgba(191,149,63,0.4)] transition">
+                        <span class="lang-ta tamil-font">அனுப்பவும்</span>
+                        <span class="lang-en lang-hidden">SEND REQUEST</span>
+                    </button>
+                </form>
             </div>
         </div>
 
@@ -297,11 +288,12 @@
     <div id="widget-toggle-btn" onclick="toggleWidget()">
         <i id="toggle-icon" class="fas fa-chart-line text-2xl text-black"></i>
     </div>
+
     <div id="widget-container">
         <div class="widget-header">
             <div class="flex items-center gap-2">
                 <span class="w-2 h-2 bg-red-600 rounded-full animate-pulse"></span>
-                <span>MCX LIVE (INR ₹)</span>
+                <span>LIVE MARKET (INR ₹)</span>
             </div>
             <button onclick="toggleWidget()" class="text-black hover:text-white transition"><i class="fas fa-times"></i></button>
         </div>
@@ -311,7 +303,15 @@
                 <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-market-overview.js" async>
                 {
                     "colorTheme": "dark", "dateRange": "1D", "showChart": false, "locale": "in", "largeChartUrl": "", "isTransparent": true, "showSymbolLogo": true, "width": "100%", "height": "100%",
-                    "tabs": [{ "title": "MCX (₹)", "symbols": [{ "s": "MCX:GOLD", "d": "GOLD (₹)" }, { "s": "MCX:SILVER", "d": "SILVER (₹)" }, { "s": "FX_IDC:XAUINR", "d": "SPOT GOLD (₹)" }] }]
+                    "tabs": [{ 
+                        "title": "Spot Rates", 
+                        "symbols": [
+                            { "s": "FX_IDC:XAGINR", "d": "SILVER SPOT (₹)" },
+                            { "s": "FX_IDC:XAUINR", "d": "GOLD SPOT (₹)" },
+                            { "s": "MCX:SILVER1!", "d": "MCX SILVER FUT" },
+                            { "s": "MCX:GOLD1!", "d": "MCX GOLD FUT" }
+                        ] 
+                    }]
                 }
                 </script>
             </div>
@@ -347,11 +347,18 @@
         }
 
         function updateShopStatus() {
+            // FIX: Force India Time (Asia/Kolkata)
             const now = new Date();
-            const d = now.getDay(), h = now.getHours();
-            const open = (d >= 1 && d <= 6) && (h >= 10 && h < 19);
+            const istDate = new Date(now.toLocaleString("en-US", {timeZone: "Asia/Kolkata"}));
+            const day = istDate.getDay(); // 0=Sun, 1=Mon...
+            const hour = istDate.getHours(); // 0-23
+
+            // Mon(1) to Sat(6) AND 10:00 to 18:59 (Before 7 PM)
+            const isOpenDay = (day >= 1 && day <= 6);
+            const isOpenTime = (hour >= 10 && hour < 19);
+
             const badge = document.getElementById('shop-status');
-            if (open) {
+            if (isOpenDay && isOpenTime) {
                 badge.innerHTML = 'OPEN NOW';
                 badge.className = 'px-3 py-1 rounded-lg text-xs font-bold uppercase bg-green-900/30 border border-green-500 text-green-400';
             } else {
