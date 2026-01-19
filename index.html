@@ -133,11 +133,20 @@
                     </h1>
                 </div>
             </div>
+            
             <div class="flex items-center gap-3">
                 <button onclick="toggleLanguage()" class="bg-[#2a2a2a] hover:bg-[#333] border border-[#b38728] text-[#fcf6ba] px-3 py-1.5 rounded-lg text-xs font-bold transition flex items-center gap-2">
                     <i class="fas fa-globe"></i> <span id="btn-text">EN</span>
                 </button>
-                <div id="shop-status" class="hidden md:block px-3 py-1 rounded-lg text-xs font-bold uppercase bg-gray-800 border border-gray-600">Checking...</div>
+                
+                <div class="flex flex-col items-end">
+                    <div id="shop-status" class="hidden md:block px-3 py-1 rounded-lg text-xs font-bold uppercase bg-gray-800 border border-gray-600">
+                        Checking...
+                    </div>
+                    <div id="shop-timer" class="text-[10px] text-[#bf953f] font-mono mt-1 hidden font-bold tracking-wider animate-pulse">
+                        Closing in: 00:00:00
+                    </div>
+                </div>
             </div>
         </div>
     </nav>
@@ -298,27 +307,56 @@
         }
 
         function updateShopStatus() {
-            // FIX: Force India Time (Asia/Kolkata)
+            // Force India Time (Asia/Kolkata)
             const now = new Date();
             const istDate = new Date(now.toLocaleString("en-US", {timeZone: "Asia/Kolkata"}));
             const day = istDate.getDay(); // 0=Sun, 1=Mon...
-            const hour = istDate.getHours(); // 0-23
+            const hour = istDate.getHours();
+            const minute = istDate.getMinutes();
+            const second = istDate.getSeconds();
 
-            // Mon(1) to Sat(6) AND 10:00 to 18:59 (Before 7 PM)
+            // Logic: Mon(1) to Sat(6) AND 10:00 to 18:59 (Before 7 PM)
             const isOpenDay = (day >= 1 && day <= 6);
             const isOpenTime = (hour >= 10 && hour < 19);
 
             const badge = document.getElementById('shop-status');
+            const timer = document.getElementById('shop-timer');
+
             if (isOpenDay && isOpenTime) {
+                // SHOP IS OPEN
                 badge.innerHTML = 'OPEN NOW';
                 badge.className = 'px-3 py-1 rounded-lg text-xs font-bold uppercase bg-green-900/30 border border-green-500 text-green-400';
+                
+                // --- TIMER LOGIC (Count down to 19:00:00) ---
+                // Calculate seconds remaining until 19:00:00 today
+                // 19:00 in seconds = 19 * 3600 = 68400
+                const closeTimeSeconds = 19 * 3600;
+                const currentTimeSeconds = (hour * 3600) + (minute * 60) + second;
+                
+                let diff = closeTimeSeconds - currentTimeSeconds;
+
+                if (diff > 0) {
+                    const h = Math.floor(diff / 3600);
+                    const m = Math.floor((diff % 3600) / 60);
+                    const s = diff % 60;
+                    
+                    // Format with leading zeros
+                    const hDisplay = h < 10 ? "0" + h : h;
+                    const mDisplay = m < 10 ? "0" + m : m;
+                    const sDisplay = s < 10 ? "0" + s : s;
+
+                    timer.innerText = `Closing in: ${hDisplay}h ${mDisplay}m ${sDisplay}s`;
+                    timer.classList.remove('hidden');
+                }
             } else {
+                // SHOP IS CLOSED
                 badge.innerHTML = 'CLOSED';
                 badge.className = 'px-3 py-1 rounded-lg text-xs font-bold uppercase bg-red-900/30 border border-red-500 text-red-400';
+                timer.classList.add('hidden');
             }
         }
         updateShopStatus();
-        setInterval(updateShopStatus, 60000);
+        setInterval(updateShopStatus, 1000); // Update every second for the timer
 
         function toggleFaq(element) {
             const allItems = document.querySelectorAll('.faq-item');
